@@ -6,7 +6,7 @@ export default function Color({ color }) {
       className="color-card"
       style={{ backgroundColor: color.hex, color: color.contrastText }}
     >
-      <p className="color-card-headline">{color.role}</p>
+      <h2 className="color-card-headline">{color.role}</h2>
       <p>{color.hex}</p>
       <p>{color.contrastText}</p>
     </article>

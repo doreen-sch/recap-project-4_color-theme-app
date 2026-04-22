@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onSubmitColor={addColor} />
+      <ColorForm onAddColor={handleAddColor} />
       <ColorCardList colors={colors} />
     </>
   );

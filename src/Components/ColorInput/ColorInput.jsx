@@ -16,7 +16,7 @@ export default function ColorInput({ id, defaultValue }) {
         value={inputValue}
         onChange={handleInputValue}
       />
-      <input type="color" value={inputValue} onChange={handleInputValue} />
+      <input name={id} type="color" value={inputValue} onChange={handleInputValue} />
     </>
   );
 }

@@ -13,11 +13,16 @@ function App() {
     setColors([colorWithId, ...colors]);
   }
 
+  function handleDeleteColor(id) {
+    const deletedColor = colors.filter((color) => color.id !== id);
+    setColors(deletedColor);
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
       <ColorForm onAddColor={handleAddColor} />
-      <ColorCardList colors={colors} />
+      <ColorCardList colors={colors} onDeleteColor={handleDeleteColor} />
     </>
   );
 }

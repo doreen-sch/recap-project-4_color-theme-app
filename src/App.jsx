@@ -8,7 +8,7 @@ import { nanoid } from "nanoid";
 function App() {
   const [colors, setColors] = useState(initialColors);
 
-  function addColor(newColor) {
+  function handleAddColor(newColor) {
     const colorWithId = { ...newColor, id: nanoid() };
     setColors([colorWithId, ...colors]);
   }

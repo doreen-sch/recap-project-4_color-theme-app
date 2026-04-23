@@ -1,6 +1,7 @@
 import "./Color.css";
 import { useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
+import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [deleteMessage, setDeleteMessage] = useState(false);
@@ -12,7 +13,10 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       style={{ backgroundColor: color.hex, color: color.contrastText }}
     >
       <h2 className="color-card-highlight">{color.role}</h2>
-      <p>{color.hex}</p>
+      <p>
+        {color.hex}
+        <CopyToClipboard hex={color.hex} />
+      </p>
       <p>{color.contrastText}</p>
       {deleteMessage ? (
         <>
@@ -44,7 +48,10 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
       {editColor ? (
         <>
           <ColorForm
-            onAddColor={(newColor) => onEditColor(color.id, newColor)}
+            onAddColor={(newColor) => {
+              onEditColor(color.id, newColor);
+              setEditColor(false);
+            }}
             initialData={color}
             buttonLabel="edit color"
           />

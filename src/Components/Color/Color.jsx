@@ -1,11 +1,30 @@
 import "./Color.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorForm from "../ColorForm/ColorForm";
 import CopyToClipboard from "../CopyToClipboard/CopyToClipboard";
 
 export default function Color({ color, onDeleteColor, onEditColor }) {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [editColor, setEditColor] = useState(false);
+  const [colorContrast, setColorContrast] = useState(null);
+
+  useEffect(() => {
+    async function postFetch() {
+      const response = await fetch(
+        "https://www.aremycolorsaccessible.com/api/are-they",
+        {
+          method: "POST",
+          body: JSON.stringify({ colors: [color.hex, color.contrastText] }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        },
+      );
+      const data = await response.json();
+      setColorContrast(data.overall);
+    }
+    postFetch();
+  }, [color]);
 
   return (
     <article
@@ -18,6 +37,19 @@ export default function Color({ color, onDeleteColor, onEditColor }) {
         <CopyToClipboard hex={color.hex} />
       </p>
       <p>{color.contrastText}</p>
+      <p>
+        <span
+          className={
+            colorContrast === "Yup"
+              ? "contrast-yup"
+              : colorContrast === "Kinda"
+                ? "contrast-kinda"
+                : "contrast-nope"
+          }
+        >
+          Overall Contrast Score: {colorContrast}
+        </span>
+      </p>
       {deleteMessage ? (
         <>
           <p className="color-card-highlight">Are you sure?</p>

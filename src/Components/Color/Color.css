@@ -9,3 +9,15 @@
   background: black;
   color: white;
 }
+
+.contrast-yup {
+  background-color: green;
+}
+
+.contrast-kinda {
+  background-color: orange;
+}
+
+.contrast-nope {
+  background-color: red;
+}

@@ -18,11 +18,20 @@ function App() {
     setColors(deletedColor);
   }
 
+  function handleEditColor(id, newColor) {
+    const editedColor = { ...newColor, id: id };
+    setColors(colors.map((color) => (color.id === id ? editedColor : color)));
+  }
+
   return (
     <>
       <h1>Theme Creator</h1>
-      <ColorForm onAddColor={handleAddColor} />
-      <ColorCardList colors={colors} onDeleteColor={handleDeleteColor} />
+      <ColorForm onAddColor={handleAddColor} buttonLabel="add color" />
+      <ColorCardList
+        colors={colors}
+        onDeleteColor={handleDeleteColor}
+        onEditColor={handleEditColor}
+      />
     </>
   );
 }
